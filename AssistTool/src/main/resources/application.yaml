@@ -1,0 +1,7 @@
+spring:
+    jmx: 
+        enabled: false
+javafx:
+    stage:
+        resizable: false
+    title: Assist tool 4 energis

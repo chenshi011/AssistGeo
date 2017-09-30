@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.ZoomifyTileController">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <TabPane prefHeight="565.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Zoomify切片">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="imgPathLbl" layoutX="160.0" layoutY="120.0" text="图片地址">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="imgPathTxtField" layoutX="236.0" layoutY="118.0" prefHeight="23.0" prefWidth="320.0" />
+                              <Button fx:id="imagePathSetBtn" layoutX="575.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#imagePathSetBtn_clickHandler" text="..." />
+                              <Label fx:id="tilePathLbl" layoutX="132.0" layoutY="192.0" text="切片存放路径">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tilePathTxtField" layoutX="236.0" layoutY="189.0" prefHeight="23.0" prefWidth="320.0" />
+                              <Button layoutX="576.0" layoutY="189.0" mnemonicParsing="false" onMouseClicked="#tilePathSetBtn_clickHandler" text="..." />
+                              <Button fx:id="processTileBtn" layoutX="362.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#processTileBtn_clickHandler" text="执行切片">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

@@ -1,0 +1,1 @@
+SELECT * FROM pg_indexes WHERE tablename = 'camera' and position('UNIQUE INDEX' in indexdef) = 0;
