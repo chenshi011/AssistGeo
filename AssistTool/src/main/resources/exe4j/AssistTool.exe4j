@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="6.0" transformSequenceNumber="2">
+  <directoryPresets config="E:/新建文件夹" />
+  <application name="AssistTool" distributionSourceDir="E:/新建文件夹/tool">
+    <languages>
+      <principalLanguage id="en" customLocalizationFile="" />
+    </languages>
+  </application>
+  <executable name="AssistTool" type="2" iconSet="false" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+" amd64="true">
+    <messageSet />
+    <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" companyName="" productVersion="" />
+  </executable>
+  <splashScreen show="false" width="0" height="0" bitmapFile="" textOverlay="false">
+    <text>
+      <statusLine x="20" y="20" text="" fontSize="8" fontColor="0,0,0" bold="false" />
+      <versionLine x="20" y="40" text="version %VERSION%" fontSize="8" fontColor="0,0,0" bold="false" />
+    </text>
+  </splashScreen>
+  <java mainClass="com.hikvision.energy.energis.fxtool.AssitTool.Application" mainMode="1" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true" minVersion="1.8" maxVersion="" allowBetaVM="false" jdkOnly="false">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <classPath>
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/AssistTool.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/AssistTool.jnlp" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/AssistTool.html" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/dom4j-1.6.1.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/fastjson-1.2.29.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/jcl-over-slf4j-1.7.25.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/jul-to-slf4j-1.7.25.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/log4j-over-slf4j-1.7.25.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/logback-classic-1.1.11.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/logback-core-1.1.11.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/slf4j-api-1.7.22.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/snakeyaml-1.17.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-aop-4.3.11.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-beans-4.3.11.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-boot-1.5.7.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-boot-autoconfigure-1.5.7.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/springboot-javafx-support-1.3.25.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-boot-starter-1.5.7.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-boot-starter-logging-1.5.7.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-context-4.3.11.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-core-4.3.11.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/spring-expression-4.3.11.RELEASE.jar" failOnError="false" />
+      <archive location="D:/workspace/java/AssistTool/out/artifacts/AssistTool/xml-apis-1.0.b2.jar" failOnError="false" />
+    </classPath>
+    <modulePath />
+    <nativeLibraryDirectories />
+    <vmOptions />
+  </java>
+  <includedFiles />
+  <unextractableFiles />
+</exe4j>
