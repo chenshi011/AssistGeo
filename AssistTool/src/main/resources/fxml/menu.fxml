@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.Button?>
 
 <GridPane fx:id="mainPane" alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.MenuController">
    <columnConstraints>
@@ -19,17 +22,36 @@
    <children>
       <TilePane fx:id="menuTilePane" hgap="40.0" prefHeight="600.0" prefWidth="800.0" vgap="40.0">
          <children>
-            <ImageView fx:id="zoomifyImgView" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#zoomifyImgView_clickHandler" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/main/tiles_128.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="exportImgView" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#exportImgView_clickHandler" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/main/export_128.png" />
-               </image>
-            </ImageView>
+            <Button onMouseClicked="#zoomifyImgView_clickHandler">
+               <tooltip>
+                  <Tooltip text="静态地图切片" />
+               </tooltip>
+               <graphic>
+                  <ImageView fx:id="zoomifyImgView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/main/tiles_128.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+
+            <Button onMouseClicked="#exportImgView_clickHandler">
+               <tooltip>
+                  <Tooltip text="导出SQL文件" />
+               </tooltip>
+               <graphic>
+                  <ImageView fx:id="exportImgView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/main/export_128.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+
          </children>
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </GridPane.margin>
       </TilePane>
    </children>
 </GridPane>

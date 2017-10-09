@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.ZoomifyTileController">
+<GridPane alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.ZoomifyTileController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -22,7 +23,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="800.0">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <ToolBar prefHeight="38.0" prefWidth="806.0">
               <items>
                 <Button fx:id="backBtn" mnemonicParsing="false" onMouseClicked="#backBtn_clickHandler" text="&lt;Back" />
               </items>
@@ -59,6 +60,9 @@
               </tabs>
             </TabPane>
          </children>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
       </VBox>
    </children>
 </GridPane>
