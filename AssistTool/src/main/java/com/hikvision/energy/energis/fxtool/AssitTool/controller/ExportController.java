@@ -30,6 +30,9 @@ public class ExportController {
     @Autowired
     private ExportService exportService;
 
+    @Autowired
+    private MainController mainController;
+
     @FXML
     private TextField pgGisVerTxtField;
 
@@ -76,6 +79,10 @@ public class ExportController {
      */
     public void disposeBtn_clickHandler() {
         dispose();
+    }
+
+    public void backBtn_clickHandler() {
+        back();
     }
 
     /**
@@ -150,6 +157,10 @@ public class ExportController {
         String dbName = dbNameTxtField.getText();
         exportService.dispose(dbName);
         msgLbl.setText("disconnect");
+    }
+
+    private void back() {
+        mainController.back();
     }
 
 

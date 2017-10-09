@@ -22,6 +22,9 @@ public class ZoomifyTileController {
     @Autowired
     private ZoomifyService zoomifyService;
 
+    @Autowired
+    private MainController mainController;
+
     @FXML
     private TextField imgPathTxtField;
 
@@ -37,6 +40,10 @@ public class ZoomifyTileController {
 
     public void tilePathSetBtn_clickHandler() {
         openTileDirectChooser();
+    }
+
+    public void backBtn_clickHandler() {
+        back();
     }
 
     /**
@@ -106,6 +113,10 @@ public class ZoomifyTileController {
     private void configureTileDirectChooser(DirectoryChooser directoryChooser) {
         directoryChooser.setTitle("选择切片存放的路径");
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    }
+
+    private void back() {
+        mainController.back();
     }
 
 }

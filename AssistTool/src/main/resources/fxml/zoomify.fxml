@@ -22,6 +22,11 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="800.0">
          <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button fx:id="backBtn" mnemonicParsing="false" onMouseClicked="#backBtn_clickHandler" text="&lt;Back" />
+              </items>
+            </ToolBar>
             <TabPane prefHeight="565.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Zoomify切片">

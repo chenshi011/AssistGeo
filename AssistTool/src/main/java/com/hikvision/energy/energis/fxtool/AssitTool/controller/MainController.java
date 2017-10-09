@@ -1,65 +1,71 @@
 package com.hikvision.energy.energis.fxtool.AssitTool.controller;
 
 import com.hikvision.energy.energis.fxtool.AssitTool.view.ExportView;
+import com.hikvision.energy.energis.fxtool.AssitTool.view.MenuView;
 import com.hikvision.energy.energis.fxtool.AssitTool.view.ZoomifyView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
- * Created by GOT.hodor on 2017/9/27.
+ * Created by GOT.hodor on 2017/10/9.
  */
 
 @FXMLController
 public class MainController {
 
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
-
-    @FXML
-    private GridPane mainPane;
-
     @Autowired
-    private ZoomifyView zoomifyView;
+    private MenuView menuView;
 
     @Autowired
     private ExportView exportView;
 
+    @Autowired
+    private ZoomifyView zoomifyView;
+
+    @FXML
+    private Pane mainPane;
+
     /**
-     *
+     * initialize
      */
-    public void zoomifyImgView_clickHandler() {
-        log.info("zoomify click");
-        showZoomifyView();
+    @FXML
+    public void initialize() {
+        loadMenu();
     }
 
     /**
-     *
+     * back to menu
      */
-    public void exportImgView_clickHandler() {
-        log.info("export click");
-        showExportView();
+    public void back() {
+        loadMenu();
     }
 
     /**
-     *
+     * load 【menu】
+     */
+    private void loadMenu() {
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(menuView.getView());
+    }
+
+    /**
+     * load 【zoomify】
      */
     public void showZoomifyView() {
         mainPane.getChildren().clear();
-
         mainPane.getChildren().add(zoomifyView.getView());
     }
 
     /**
-     *
+     * load 【export sql】
      */
     public void showExportView() {
         mainPane.getChildren().clear();
-
         mainPane.getChildren().add(exportView.getView());
     }
+
 
 }

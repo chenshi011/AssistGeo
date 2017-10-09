@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.ExportController">
+<GridPane alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hikvision.energy.energis.fxtool.AssitTool.controller.ExportController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -16,38 +15,47 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1">
-        <tabs>
-          <Tab text="PostGIS SQL导出 ">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="dbNameLbl" alignment="CENTER_RIGHT" layoutX="161.0" layoutY="86.0" prefHeight="15.0" prefWidth="62.0" text="db name" />
-                        <TextField fx:id="dbNameTxtField" layoutX="250.0" layoutY="82.0" prefHeight="23.0" prefWidth="300.0" text="gis_db" />
-                        <TextField fx:id="ipTxtField" layoutX="250.0" layoutY="129.0" prefHeight="23.0" prefWidth="300.0" text="127.0.0.1" />
-                        <TextField fx:id="portTxtField" layoutX="250.0" layoutY="181.0" prefHeight="23.0" prefWidth="300.0" text="6432" />
-                        <TextField fx:id="userTxtField" layoutX="250.0" layoutY="232.0" prefHeight="23.0" prefWidth="300.0" text="postgres" />
-                        <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="133.0" prefHeight="15.0" prefWidth="37.0" text="ip" />
-                        <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="185.0" prefHeight="15.0" prefWidth="37.0" text="port" />
-                        <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="236.0" prefHeight="15.0" prefWidth="37.0" text="user" />
-                        <TextField fx:id="pwdTxtField" layoutX="250.0" layoutY="286.0" prefHeight="23.0" prefWidth="300.0" text="postgres" />
-                        <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="290.0" prefHeight="15.0" prefWidth="37.0" text="pwd" />
-                        <Button fx:id="connBtn" layoutX="250.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#connBtn_clickHandler" text="连接" />
-                        <Button fx:id="exportBtn" layoutX="380.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#exportBtn_clickHandler" text="导出" />
-                        <Button fx:id="disposeBtn" layoutX="510.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#disposeBtn_clickHandler" text="断开" />
-                        <Label fx:id="msgLbl" layoutX="215.0" layoutY="508.0" prefHeight="15.0" prefWidth="371.0" />
-                        <TextField fx:id="exportPathTxtField" layoutX="251.0" layoutY="335.0" prefHeight="23.0" prefWidth="300.0" text="C:\" />
-                        <Label alignment="CENTER_RIGHT" layoutX="135.0" layoutY="339.0" prefHeight="15.0" prefWidth="88.0" text="export path" />
-                        <Button fx:id="exportPathBtn" layoutX="576.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#exportPathBtn_clickHandler" text="..." />
-                        <TextField fx:id="exportFileNameTxtField" layoutX="250.0" layoutY="380.0" prefHeight="23.0" prefWidth="300.0" text="create.sql" />
-                        <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="384.0" prefHeight="15.0" prefWidth="123.0" text="export file name" />
-                        <TextField fx:id="pgGisVerTxtField" layoutX="251.0" layoutY="35.0" prefHeight="23.0" prefWidth="300.0" text="2.0.6" />
-                        <Label fx:id="dbNameLbl1" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="39.0" prefHeight="15.0" prefWidth="123.0" text="postgis version" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <VBox prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button fx:id="backBtn" mnemonicParsing="false" onMouseClicked="#backBtn_clickHandler" text="&lt;Back" />
+              </items>
+            </ToolBar>
+              <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                  <Tab text="PostGIS SQL导出 ">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#backBtn_clickHandler" prefHeight="180.0" prefWidth="200.0">
+                             <children>
+                                <Label fx:id="dbNameLbl" alignment="CENTER_RIGHT" layoutX="161.0" layoutY="86.0" prefHeight="15.0" prefWidth="62.0" text="db name" />
+                                <TextField fx:id="dbNameTxtField" layoutX="250.0" layoutY="82.0" prefHeight="23.0" prefWidth="300.0" text="gis_db" />
+                                <TextField fx:id="ipTxtField" layoutX="250.0" layoutY="129.0" prefHeight="23.0" prefWidth="300.0" text="127.0.0.1" />
+                                <TextField fx:id="portTxtField" layoutX="250.0" layoutY="181.0" prefHeight="23.0" prefWidth="300.0" text="6432" />
+                                <TextField fx:id="userTxtField" layoutX="250.0" layoutY="232.0" prefHeight="23.0" prefWidth="300.0" text="postgres" />
+                                <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="133.0" prefHeight="15.0" prefWidth="37.0" text="ip" />
+                                <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="185.0" prefHeight="15.0" prefWidth="37.0" text="port" />
+                                <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="236.0" prefHeight="15.0" prefWidth="37.0" text="user" />
+                                <TextField fx:id="pwdTxtField" layoutX="250.0" layoutY="286.0" prefHeight="23.0" prefWidth="300.0" text="postgres" />
+                                <Label alignment="CENTER_RIGHT" layoutX="186.0" layoutY="290.0" prefHeight="15.0" prefWidth="37.0" text="pwd" />
+                                <Button fx:id="connBtn" layoutX="250.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#connBtn_clickHandler" text="连接" />
+                                <Button fx:id="exportBtn" layoutX="380.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#exportBtn_clickHandler" text="导出" />
+                                <Button fx:id="disposeBtn" layoutX="510.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#disposeBtn_clickHandler" text="断开" />
+                                <Label fx:id="msgLbl" layoutX="215.0" layoutY="508.0" prefHeight="15.0" prefWidth="371.0" />
+                                <TextField fx:id="exportPathTxtField" layoutX="251.0" layoutY="335.0" prefHeight="23.0" prefWidth="300.0" text="C:\" />
+                                <Label alignment="CENTER_RIGHT" layoutX="135.0" layoutY="339.0" prefHeight="15.0" prefWidth="88.0" text="export path" />
+                                <Button fx:id="exportPathBtn" layoutX="576.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#exportPathBtn_clickHandler" text="..." />
+                                <TextField fx:id="exportFileNameTxtField" layoutX="250.0" layoutY="380.0" prefHeight="23.0" prefWidth="300.0" text="create.sql" />
+                                <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="384.0" prefHeight="15.0" prefWidth="123.0" text="export file name" />
+                                <TextField fx:id="pgGisVerTxtField" layoutX="251.0" layoutY="35.0" prefHeight="23.0" prefWidth="300.0" text="2.0.6" />
+                                <Label fx:id="dbNameLbl1" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="39.0" prefHeight="15.0" prefWidth="123.0" text="postgis version" />
+                             </children>
+                          </AnchorPane>
+                    </content>
+                  </Tab>
+                </tabs>
+              </TabPane>
+         </children>
+      </VBox>
    </children>
 </GridPane>
