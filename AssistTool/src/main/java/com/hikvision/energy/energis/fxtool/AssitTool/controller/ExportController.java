@@ -61,6 +61,11 @@ public class ExportController {
     private Label msgLbl;
 
     /**
+     * 数据库连接状态
+     */
+    private boolean connected = false;
+
+    /**
      *
      */
     public void connBtn_clickHandler() {
@@ -128,13 +133,19 @@ public class ExportController {
         boolean connState = exportService.connect(dbNameTxtField.getText(), params);
 
         if (connState) {
+            connected = true;
             msgLbl.setText("connect success");
         }else{
+            connected = false;
             msgLbl.setText("connect failed");
         }
     }
 
     private void export() {
+        if (!connected) {
+            msgLbl.setText("db is not connected");
+            return;
+        }
         try{
             String dbName = dbNameTxtField.getText();
             String path = exportPathTxtField.getText();
@@ -156,6 +167,7 @@ public class ExportController {
     private void dispose() {
         String dbName = dbNameTxtField.getText();
         exportService.dispose(dbName);
+        connected = false;
         msgLbl.setText("disconnect");
     }
 
