@@ -13,7 +13,7 @@
         <java.ver>1.8</java.ver>
         <spring.boot.ver>1.5.7.RELEASE</spring.boot.ver>
         <springboot-javafx.version>1.3.25</springboot-javafx.version>
-        <gt.ver>18-RC1</gt.ver>
+        <gt.ver>18.0</gt.ver>
     </properties>
 
     <!--<parent>-->
