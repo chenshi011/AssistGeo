@@ -10,11 +10,15 @@ import org.geotools.data.DataUtilities;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
+import org.geotools.gce.arcgrid.ArcGridFormat;
+import org.geotools.gce.arcgrid.ArcGridWriteParams;
+import org.geotools.gce.arcgrid.ArcGridWriter;
 import org.geotools.gce.geotiff.GeoTiffFormat;
 import org.geotools.gce.geotiff.GeoTiffWriteParams;
 import org.geotools.gce.geotiff.GeoTiffWriter;
 import org.geotools.geojson.feature.FeatureJSON;
 import org.geotools.geometry.DirectPosition2D;
+import org.geotools.process.raster.CoverageUtilities;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.operation.builder.MappedPosition;
 import org.opengis.feature.simple.SimpleFeature;
@@ -103,17 +107,26 @@ public class Utils {
         featureJSON.writeFeatureCollection(featureCollection, file);
     }
 
+    public static void writeArcGrid(File file, GridCoverage2D gridCoverage) throws IOException {
+        ArcGridWriter arcGridWriter = new ArcGridWriter(file);
+        ArcGridWriteParams params = new ArcGridWriteParams();
+        ParameterValue<GeoToolsWriteParams> value = ArcGridFormat.GEOTOOLS_WRITE_PARAMS.createValue();
+        value.setValue(params);
+        arcGridWriter.write(gridCoverage, new GeneralParameterValue[]{value});
+        arcGridWriter.dispose();
+    }
+
     /**
      *
      * @return
      * @throws FactoryException
      */
-    public static SimpleFeatureCollection createFeatureCollection() throws FactoryException {
+    public static SimpleFeatureCollection createPointFeatureCollection() throws FactoryException {
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
         typeBuilder.setName("zvals");
 
         typeBuilder.add("name", String.class);
-        typeBuilder.add("zval", Integer.class);
+        typeBuilder.add("zval", Float.class);
         typeBuilder.add("geom", Point.class, CRS.decode("EPSG:4326"));
 
         SimpleFeatureType featureType = typeBuilder.buildFeatureType();
@@ -123,31 +136,31 @@ public class Utils {
         SimpleFeatureBuilder featureBuilder = new SimpleFeatureBuilder(featureType);
 
         featureBuilder.set("name", "one");
-        featureBuilder.set("zval", Integer.valueOf(50));
+        featureBuilder.set("zval", Float.valueOf(50));
         featureBuilder.set("geom", geometryFromWkt("POINT(120 30)"));
         SimpleFeature feature1 = featureBuilder.buildFeature("1");
         list.add(feature1);
 
         featureBuilder.set("name", "two");
-        featureBuilder.set("zval", Integer.valueOf(20));
+        featureBuilder.set("zval", Float.valueOf(20));
         featureBuilder.set("geom", geometryFromWkt("POINT(119.5 29.5)"));
         SimpleFeature feature2 = featureBuilder.buildFeature("2");
         list.add(feature2);
 
         featureBuilder.set("name", "three");
-        featureBuilder.set("zval", Integer.valueOf(50));
+        featureBuilder.set("zval", Float.valueOf(50));
         featureBuilder.set("geom", geometryFromWkt("POINT(119 29)"));
         SimpleFeature feature3 = featureBuilder.buildFeature("3");
         list.add(feature3);
 
         featureBuilder.set("name", "four");
-        featureBuilder.set("zval", Integer.valueOf(50));
+        featureBuilder.set("zval", Float.valueOf(50));
         featureBuilder.set("geom", geometryFromWkt("POINT(119 30)"));
         SimpleFeature feature4 = featureBuilder.buildFeature("4");
         list.add(feature4);
 
         featureBuilder.set("name", "five");
-        featureBuilder.set("zval", Integer.valueOf(50));
+        featureBuilder.set("zval", Float.valueOf(50));
         featureBuilder.set("geom", geometryFromWkt("POINT(120 29)"));
         SimpleFeature feature5 = featureBuilder.buildFeature("5");
         list.add(feature5);

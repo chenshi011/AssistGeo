@@ -107,7 +107,7 @@ public class Interpolate {
     public static void vectorToRaster() {
         String path = "F:\\MapWorkspace\\gdem";
         try{
-            SimpleFeatureCollection featureCollection = Utils.createFeatureCollection();
+            SimpleFeatureCollection featureCollection = Utils.createPointFeatureCollection();
 
             simpleVectorToRaster(featureCollection, path);
 

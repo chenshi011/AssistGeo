@@ -40,7 +40,7 @@ public class VTRProcess {
 
     private static void geometryType() {
         try{
-            SimpleFeatureCollection featureCollection = Utils.createFeatureCollection();
+            SimpleFeatureCollection featureCollection = Utils.createPointFeatureCollection();
             FeatureIterator fi = featureCollection.features();
 
             try{

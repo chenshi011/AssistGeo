@@ -122,6 +122,11 @@
             <version>${gt.ver}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-arcgrid</artifactId>
+            <version>${gt.ver}</version>
+        </dependency>
 
 
 
