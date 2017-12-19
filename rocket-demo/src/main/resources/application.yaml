@@ -1,0 +1,32 @@
+# server
+server:
+  port: 8080
+  context-path: /assist-geo
+
+spring:
+  # datasource
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/rocket-demo?useUnicode=true&characterEncoding=utf-8
+    username: postgres
+    data-password: postgres
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    request-context-attribute: rc
+    suffix: .ftl
+    cache: false
+
+  mvc:
+    static-path-pattern: /static/**
+
+  devtools:
+    restart:
+      additional-paths: boot-demo/src/main
+
+
+# mybatis
+mybatis-plus:
+  mapper-locations: classpath:/cn/swipeblade/bootdemo/mapper/xml/*Mapper.xml
+  typeAliasesPackage: cn.swipeblade.bootdemo.entity

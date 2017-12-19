@@ -31,14 +31,24 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by GOT.hodor on 2017/10/16.
  */
 public class Utils {
+
+    public static Map<String, Object> connParams() {
+        Map<String,Object> params = new HashMap<>();
+        params.put( "dbtype", "postgis");
+        params.put( "host", "127.0.0.1");
+        params.put( "port", 6432);
+        params.put( "schema", "public");
+        params.put( "database", "energis_db");
+        params.put( "user", "postgres");
+        params.put( "passwd", "postgres");
+        return params;
+    }
 
     /**
      * parse wkt
@@ -86,9 +96,9 @@ public class Utils {
     }
 
     /**
-     * write tif file
-     * @param file
-     * @param gridCoverage
+     * 写文件
+     * @param file 文件
+     * @param gridCoverage GridCoverage2D
      * @throws IOException
      */
     public static void writeTiff(File file, GridCoverage2D gridCoverage) throws IOException {

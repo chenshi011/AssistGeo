@@ -337,25 +337,46 @@ public class InverseDistanceWeighting {
 
     }
 
-    public static float[][] vectorToMatrix(SimpleFeatureCollection featureCollection, String attr, ReferencedEnvelope env, int w, int h, float nv) {
+    /**
+     * 要素值转栅格值
+     * @param featureCollection 样本集合
+     * @param attr 样本指标字段
+     * @param env 范围
+     * @param w 栅格宽度
+     * @param h 栅格高度
+     * @param nv 无数据值
+     * @return float[][]
+     */
+    public static float[][] vectorToMatrix(SimpleFeatureCollection featureCollection,
+                                           String attr,
+                                           ReferencedEnvelope env,
+                                           int w, int h, float nv) {
+        //创建栅格matrix
         float[][] matrix = new float[w][h];
         for (int i=0;i<w;i++) {
             for (int j=0;j<h;j++){
+                // 所有的栅格值先赋值为无数据值
                 matrix[i][j] = nv;
             }
         }
 
+        // 计算每个小栅格的大小
+        // x方向：范围东西向距离除以栅格列数w
         double xcellSize = (env.getMaximum(0) - env.getMinimum(0))/w;
+        // y方向：范围南北向距离除以栅格行数h
         double ycellSize = (env.getMaximum(1) - env.getMinimum(1))/h;
 
+        //样本指标值放入栅格
         FeatureIterator<SimpleFeature> fi = featureCollection.features();
         try{
-            while (fi.hasNext()) {
+            while (fi.hasNext()) {  //循环样本集合
                 SimpleFeature feature = fi.next();
 
+                //样本坐标
                 Geometry geometry = (Geometry) feature.getDefaultGeometry();
                 Coordinate[] coordinates = geometry.getCoordinates();
 
+                //根据样本坐标计算样本所在的栅格行列号
                 for (int n=0; n < coordinates.length; n++) {
                     double col = (coordinates[n].x - env.getMinimum(0)) / xcellSize;
                     double row = (coordinates[n].y - env.getMinimum(1)) / ycellSize;
@@ -363,8 +384,7 @@ public class InverseDistanceWeighting {
                     int colIdx = Double.valueOf(Math.floor(col)).intValue();
                     int rowIdx = Double.valueOf(Math.floor(row)).intValue();
 
-                    out.println("x :" + colIdx + " y : " + rowIdx);
-
+                    //matrix赋值
                     matrix[colIdx][rowIdx] = (Float.class).cast(feature.getAttribute(attr));
                 }
 
@@ -375,80 +395,88 @@ public class InverseDistanceWeighting {
         return matrix;
     }
 
-    private static void actIDW(String path) throws FactoryException, IOException {
-        GridCoverageFactory gcf = new GridCoverageFactory();
-
+    public static void actIDW(String path) throws FactoryException, IOException {
+        //设置范围 x1, x2, y1, y2
         ReferencedEnvelope env = new ReferencedEnvelope(
                 118, 121, 28, 31,
                 DefaultGeographicCRS.WGS84
         );
 
+        //设置栅格宽高
         int w = 256;
         int h = 256;
 
+        //设置无数据值
         float noDataVal = -999;
 
+        //获取样本
         SimpleFeatureCollection featureCollection = Utils.createPointFeatureCollection();
 
+        //样本值填充到matrix
         float[][] matrix = vectorToMatrix(featureCollection, "zval", env, w, h, noDataVal);
 
+        //IDW计算每个栅格值
         float[][] idwMatrix = idw(matrix, 4, 2, noDataVal);
 
+        //生成GridCoverage2D对象
+        GridCoverageFactory gcf = new GridCoverageFactory();
         GridCoverage2D gridCoverage2D = gcf.create("idw", idwMatrix, env);
 
+        //写tiff文件
         File file = new File(path + "/idw_grid.tiff");
         Utils.writeTiff(file, gridCoverage2D);
-
     }
 
     /**
-     * Inverse Distance Weighting
-     * only support float[][]
-     * @param grid matrix
-     * @param gr search grid range
-     * @param pow power, suggest 2
-     * @param nv grid no data value
-     * @return
+     * 反距离加权计算
+     * @param grid 栅格matrix
+     * @param gr 栅格搜索半径
+     * @param pow 幂次,建议为2
+     * @param nv 无数据值
+     * @return float[][]
      */
     public static float[][] idw(float[][] grid, int gr, int pow, float nv) {
         /**
          * <p>
-         *     Inverse Distance Weighting
+         *     IDW公式
          *     Zi' = Σ(Zi/Di^pow) * ([Σ(1/Di^pow)]^(-1))
          * </p>
          */
 
-        if (gr < 1) gr = 1; //default grid radius = 1;
+        //默认栅格搜索半径为1,即取待测栅格周围8个栅格的值作为加权值;
+        if (gr < 1) gr = 1;
 
         int w = grid.length;    // grid width
         int h = grid[0].length; // grid height
 
         float[][] matrix = new float[w][h];
 
-        //region do loop
-        for (int x=0; x < w; x++) {     //from grid start x to grid end x
-            for (int y=0; y < h; y++) {     //from grid end y to grid end y
+        //region 循环栅格
+        for (int x=0; x < w; x++) {     //循环列
+            for (int y=0; y < h; y++) {     //循环行
 
-                //region if grid cell value is a observable value, continue the loop
+                //region 如果栅格值是样本值，循环下一个栅格
                 if (grid[x][y] != nv) {
                     matrix[x][y] = grid[x][y];
                     continue;
                 }
                 //endregion
 
-                //region block by grid range
-                int sx = (x - gr) < 0 ? 0 : (x - gr);   // start x
-                int sy = (y - gr) < 0 ? 0 : (y - gr);   // start y
-                int ex = (x + gr) > (w-1) ? (w-1) : (x + gr);   //end x
-                int ey = (y + gr) > (h-1) ? (h-1) : (y + gr);   //end y
+                //region 计算搜索半径包含的栅格
+                int sx = (x - gr) < 0 ? 0 : (x - gr);   // 列起点
+                int sy = (y - gr) < 0 ? 0 : (y - gr);   // 行起点
+                int ex = (x + gr) > (w-1) ? (w-1) : (x + gr);   // 列终点
+                int ey = (y + gr) > (h-1) ? (h-1) : (y + gr);   // 行终点
                 //endregion
 
-                //region if all nearest is noDataValue, grid cell is noDataValue
+                //region 判断搜索半径内的格子是否全部无数据
+                // 如果当前要计算的格子搜索半径内的所有的格子都是无数据的格子
+                // 当前格子仍然记为无数据, 跳过
                 int sx1 = sx;
                 boolean isNV = true;
 
-                while (sx1 <= ex) {     //form start x to end x
-                    int sy1 = sy;   //from start y to end y
+                while (sx1 <= ex) {     //循环搜索的列
+                    int sy1 = sy;   //循环搜索的行
                     while (sy1 <= ey) {
                         isNV = grid[sx1][sy1] == nv;
                         if (!isNV){
@@ -468,10 +496,10 @@ public class InverseDistanceWeighting {
                 }
                 //endregion
 
-                //region grid cell value from block, use IDW
+                //region 使用反距离加权计算当前格子的指标值
                 float sz = 0.0f;      // z val summary
                 float sw = 0.0f;      // weight summary
-                //region loop block
+                //region 循环搜索范围内的格子，计算距离、权重
                 while (sx <= ex) {
                     int sy1 = sy;   //from start y to end y;
                     while (sy1 <= ey) {
@@ -489,7 +517,7 @@ public class InverseDistanceWeighting {
                     sx++;
                 }
                 //endregion
-                matrix[x][y] = sz/sw;   // interpolated cell value
+                matrix[x][y] = sz/sw;   // 为格子赋值插值结果
                 //endregion
 
             }

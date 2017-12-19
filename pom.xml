@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.swipeblade.assistgeo</groupId>
+    <artifactId>assist-geo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>AssistTool</module>
+        <module>geoprocess</module>
+
+    </modules>
+    <packaging>pom</packaging>
+    <name>assist-geo</name>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>assist-geo</id>
+            <modules>
+                <module>geoprocess</module>
+            </modules>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>assist-geo-deploy</id>
+            <modules>
+                <module>geoprocess</module>
+            </modules>
+        </profile>
+
+
+    </profiles>
+</project>
