@@ -33,10 +33,10 @@ window.onload = function (ev) {
         },
         created : function () {
             this.stompClient = new StompClient({
-                endpoint : '/bladeOne/sk'
+                endpoint : '/assist-geo/assist'
             });
 
-            this.stompClient.addSubscribe('/topic/welcome', this.welcomeTopic);
+            this.stompClient.addSubscribe('/topic/web/welcome', this.welcomeTopic);
 
             this.stompClient.connect();
         }

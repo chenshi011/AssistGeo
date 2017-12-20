@@ -7,9 +7,9 @@ spring:
   # datasource
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/rocket-demo?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:postgresql://localhost:6432/rocket-demo?useUnicode=true&characterEncoding=utf-8
     username: postgres
-    data-password: postgres
+    password: postgres
     type: com.alibaba.druid.pool.DruidDataSource
 
   freemarker:
@@ -23,7 +23,7 @@ spring:
 
   devtools:
     restart:
-      additional-paths: boot-demo/src/main
+      additional-paths: rocket-demo/src/main
 
 
 # mybatis

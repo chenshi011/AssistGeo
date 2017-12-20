@@ -19,5 +19,5 @@
 
 </div>
 </body>
-<script src="${rc.contextPath}/static/js/websocket/main.js"></script>
+<script src="${rc.contextPath}/static/js/index/main.js"></script>
 </html>
