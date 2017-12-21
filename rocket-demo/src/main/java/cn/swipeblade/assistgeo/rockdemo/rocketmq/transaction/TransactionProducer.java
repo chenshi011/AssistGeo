@@ -1,35 +1,41 @@
-package cn.swipeblade.assistgeo.rockdemo.rocketmq.order;
+package cn.swipeblade.assistgeo.rockdemo.rocketmq.transaction;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.TransactionCheckListener;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
-/**
- * Created by GOT.hodor on 2017/12/20.
- */
+public class TransactionProducer {
 
-public class OrderProducer {
+    private final Logger log = LoggerFactory.getLogger(TransactionConsumer.class);
 
-    private final Logger log = LoggerFactory.getLogger(OrderProducer.class);
-
-    private String producerGroup = "OrderProducerGroup";
+    private String producerGroup = "TransactionProducerGroup";
 
     private String namesrvAddr = "127.0.0.1:9876";
 
-    private DefaultMQProducer producer;
+    private TransactionCheckListener listener;
+
+    private TransactionMQProducer producer;
 
     public void init() throws MQClientException {
-        producer = new DefaultMQProducer(producerGroup);
+        listener = new TransactionCheckListenerImpl();
+        producer = new TransactionMQProducer(producerGroup);
+
         producer.setNamesrvAddr(namesrvAddr);
         producer.setInstanceName(String.valueOf(System.currentTimeMillis()));
         producer.setRetryTimesWhenSendAsyncFailed(3);
 
-        producer.start();
+        producer.setCheckThreadPoolMinSize(2);
+        producer.setCheckThreadPoolMaxSize(2);
 
-        log.info("orderly producer start");
+        producer.setCheckRequestHoldMax(2000);
+        producer.setTransactionCheckListener(listener);
+
+        producer.start();
+        log.info("producer started");
+
     }
 
     public void destroy() {
@@ -40,16 +46,8 @@ public class OrderProducer {
         return producer;
     }
 
-    public String getProducerGroup() {
-        return producerGroup;
-    }
-
     public void setProducerGroup(String producerGroup) {
         this.producerGroup = producerGroup;
-    }
-
-    public String getNamesrvAddr() {
-        return namesrvAddr;
     }
 
     public void setNamesrvAddr(String namesrvAddr) {

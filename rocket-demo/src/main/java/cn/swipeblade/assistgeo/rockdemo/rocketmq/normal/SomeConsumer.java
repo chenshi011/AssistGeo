@@ -16,15 +16,12 @@ import org.springframework.context.annotation.PropertySource;
  * Created by GOT.hodor on 2017/12/20.
  */
 
-@PropertySource(value = "classpath:rocketmq.properties", encoding = "utf-8")
 public class SomeConsumer {
     private static final Logger log = LoggerFactory.getLogger(SomeConsumer.class);
 
-    @Value("${some-comsumer-group}")
-    private String consumerGroup;
+    private String consumerGroup = "SomeConsumerGroup";
 
-    @Value("${name-server-address}")
-    private String namesrvAddr;
+    private String namesrvAddr = "127.0.0.1:9876";
 
     private DefaultMQPushConsumer consumer;
 
