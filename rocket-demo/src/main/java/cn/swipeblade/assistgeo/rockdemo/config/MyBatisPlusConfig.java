@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@MapperScan(basePackages = {"cn.swipeblade.bootdemo.mapper"})
+@MapperScan(basePackages = {"cn.swipeblade.assistgeo.rockdemo.mapper"})
 public class MyBatisPlusConfig {
 
     @Bean

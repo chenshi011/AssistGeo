@@ -27,14 +27,11 @@ spring:
 
   redis:
     database: 0
-    host: 10.11.160.102
+    host: 127.0.0.1
     port: 6379
-    password:
-    pool:
-      max-active: 8
 
 
 # mybatis
 mybatis-plus:
-  mapper-locations: classpath:cn/swipeblade/assistgeo/rockdemo/mapper/xml/*Mapper.xml
+  mapper-locations: classpath:/cn/swipeblade/assistgeo/rockdemo/mapper/xml/*Mapper.xml
   typeAliasesPackage: cn.swipeblade.assistgeo.rockdemo.entity
