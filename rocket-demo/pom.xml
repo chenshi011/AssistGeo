@@ -42,7 +42,7 @@
       <version>1.5.6.RELEASE</version>
     </dependency>
 
-
+    <!-- db -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
@@ -63,7 +63,7 @@
 
 
 
-    <!-- -->
+    <!-- mybatis plus -->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatisplus-spring-boot-starter</artifactId>
@@ -77,6 +77,12 @@
     </dependency>
 
 
+    <!-- redis -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+      <version>1.5.9.RELEASE</version>
+    </dependency>
 
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -98,6 +104,7 @@
       <version>1.5.7.RELEASE</version>
     </dependency>
 
+    <!-- websocket -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-websocket</artifactId>
@@ -169,6 +176,13 @@
     </plugins>
 
     <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+      </resource>
+
       <resource>
         <directory>src/main/java</directory>
         <includes>

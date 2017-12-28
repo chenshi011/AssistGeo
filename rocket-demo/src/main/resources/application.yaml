@@ -25,8 +25,16 @@ spring:
     restart:
       additional-paths: rocket-demo/src/main
 
+  redis:
+    database: 0
+    host: 10.11.160.102
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+
 
 # mybatis
 mybatis-plus:
-  mapper-locations: classpath:/cn/swipeblade/bootdemo/mapper/xml/*Mapper.xml
-  typeAliasesPackage: cn.swipeblade.bootdemo.entity
+  mapper-locations: classpath:cn/swipeblade/assistgeo/rockdemo/mapper/xml/*Mapper.xml
+  typeAliasesPackage: cn.swipeblade.assistgeo.rockdemo.entity

@@ -18,4 +18,3 @@ public class MyBatisPlusConfig {
         return new PaginationInterceptor();
     }
 }
-
